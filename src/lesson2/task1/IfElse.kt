@@ -3,6 +3,7 @@
 package lesson2.task1
 
 import lesson1.task1.discriminant
+import lesson1.task1.loh
 import kotlin.math.max
 import kotlin.math.sqrt
 
@@ -11,7 +12,12 @@ import kotlin.math.sqrt
 // Рекомендуемое количество баллов = 5
 // Вместе с предыдущими уроками = 9/12
 
+fun main() {
+
+}
+
 /**
+ * Пример
  * Пример
  *
  * Найти число корней квадратного уравнения ax^2 + bx + c = 0
@@ -68,7 +74,16 @@ fun minBiRoot(a: Double, b: Double, c: Double): Double {
  * Мой возраст. Для заданного 0 < n < 200, рассматриваемого как возраст человека,
  * вернуть строку вида: «21 год», «32 года», «12 лет».
  */
-fun ageDescription(age: Int): String = TODO()
+fun ageDescription(age: Int): String {
+    val end = age % 10
+    return if (age in 5..14 || age in 105..114) "$age лет" else when (end) {
+        in 5..9 -> "$age лет"
+        0 -> "$age лет"
+        1 -> "$age год"
+        in 2..4 -> "$age года"
+        else -> "0"
+    }
+}
 
 /**
  * Простая (2 балла)
@@ -81,7 +96,13 @@ fun timeForHalfWay(
     t1: Double, v1: Double,
     t2: Double, v2: Double,
     t3: Double, v3: Double
-): Double = TODO()
+): Double {
+    val halfPath = (t1 * v1 + t2 * v2 + t3 * v3) / 2
+    println("Длина половины пути: $halfPath")
+    if (halfPath - v1 * t1 <= 0) return halfPath / v1
+    else if (halfPath - v1 * t1 - v2 * t2 >= 0) return t1 + t2 + ((halfPath - t1 * v1 - t2 * v2) / v3)
+    else return t1 + ((halfPath - t1 * v1) / v2)
+}
 
 /**
  * Простая (2 балла)
@@ -96,7 +117,15 @@ fun whichRookThreatens(
     kingX: Int, kingY: Int,
     rookX1: Int, rookY1: Int,
     rookX2: Int, rookY2: Int
-): Int = TODO()
+): Int {
+    when {
+        kingX == rookX1 || kingY == rookY1 -> 1
+        kingX == rookX2 || kingY == rookY2 -> 2
+        kingY == rookY1 || kingY == rookY2 -> 1
+    }
+    return 0
+}
+
 
 /**
  * Простая (2 балла)
