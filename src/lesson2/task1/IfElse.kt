@@ -113,19 +113,23 @@ fun timeForHalfWay(
  * и 3, если угроза от обеих ладей.
  * Считать, что ладьи не могут загораживать друг друга
  */
+
 fun whichRookThreatens(
     kingX: Int, kingY: Int,
     rookX1: Int, rookY1: Int,
     rookX2: Int, rookY2: Int
 ): Int {
-    when {
+    val dangerous = when {
         kingX == rookX1 || kingY == rookY1 -> 1
         kingX == rookX2 || kingY == rookY2 -> 2
-        kingY == rookY1 || kingY == rookY2 -> 1
+        else -> 0
     }
-    return 0
+    return when (dangerous){
+        2 -> 2
+        1 -> if ((kingX == rookX2 || kingY == rookY2) && (kingX == rookX1 || kingY == rookY1)) 3 else 1
+        else -> 0
+    }
 }
-
 
 /**
  * Простая (2 балла)
