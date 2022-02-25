@@ -16,7 +16,7 @@ class Tests {
     @Test
     @Tag("Example")
     fun alignFile() {
-        alignFile("input/align_in1.txt", 50, "temp.txt")
+        lesson4.task1.task1.alignFile("input/align_in1.txt", 50, "temp.txt")
         assertFileContent(
             "temp.txt",
             """Для написания разных видов программ сейчас
@@ -60,7 +60,7 @@ Basic, Ruby, Swift.
     @Test
     @Tag("8")
     fun deleteMarked() {
-        deleteMarked("input/delete_in1.txt", "temp.txt")
+        lesson4.task1.task1.deleteMarked("input/delete_in1.txt", "temp.txt")
         assertFileContent(
             "temp.txt",
             """Задачи _надо_ решать правильно,
@@ -76,22 +76,28 @@ Basic, Ruby, Swift.
     fun countSubstrings() {
         assertEquals(
             mapOf("РАЗНЫЕ" to 2, "ные" to 2, "Неряшливость" to 1, "е" to 49, "эволюция" to 0),
-            countSubstrings("input/substrings_in1.txt", listOf("РАЗНЫЕ", "ные", "Неряшливость", "е", "эволюция"))
+            lesson4.task1.task1.countSubstrings(
+                "input/substrings_in1.txt",
+                listOf("РАЗНЫЕ", "ные", "Неряшливость", "е", "эволюция")
+            )
         )
         assertEquals(
             mapOf("Карминовый" to 2, "Некрасивый" to 2, "белоглазый" to 1),
-            countSubstrings("input/substrings_in1.txt", listOf("Карминовый", "Некрасивый", "белоглазый"))
+            lesson4.task1.task1.countSubstrings(
+                "input/substrings_in1.txt",
+                listOf("Карминовый", "Некрасивый", "белоглазый")
+            )
         )
         assertEquals(
             mapOf("--" to 4, "ее" to 2, "животное" to 2, "." to 2),
-            countSubstrings("input/substrings_in2.txt", listOf("--", "ее", "животное", "."))
+            lesson4.task1.task1.countSubstrings("input/substrings_in2.txt", listOf("--", "ее", "животное", "."))
         )
     }
 
     @Test
     @Tag("12")
     fun sibilants() {
-        sibilants("input/sibilants_in1.txt", "temp.txt")
+        lesson4.task1.task1.sibilants("input/sibilants_in1.txt", "temp.txt")
         assertFileContent(
             "temp.txt",
             """/**
@@ -115,7 +121,7 @@ Basic, Ruby, Swift.
     @Test
     @Tag("15")
     fun centerFile() {
-        centerFile("input/center_in1.txt", "temp.txt")
+        lesson4.task1.task1.centerFile("input/center_in1.txt", "temp.txt")
         assertFileContent(
             "temp.txt",
             """              Съешь же ещё этих мягких французских булок, да выпей чаю.
@@ -134,7 +140,7 @@ Basic, Ruby, Swift.
     @Test
     @Tag("20")
     fun alignFileByWidth() {
-        alignFileByWidth("input/width_in1.txt", "temp.txt")
+        lesson4.task1.task1.alignFileByWidth("input/width_in1.txt", "temp.txt")
         assertFileContent(
             "temp.txt",
             """Простая
@@ -163,7 +169,7 @@ Basic, Ruby, Swift.
     @Test
     @Tag("14")
     fun top20Words() {
-        assertEquals(mapOf<String, Int>(), top20Words("input/empty.txt"))
+        assertEquals(mapOf<String, Int>(), lesson4.task1.task1.top20Words("input/empty.txt"))
         assertEquals(mapOf(
             "привет" to 4,
             "все" to 3,
@@ -175,7 +181,7 @@ Basic, Ruby, Swift.
             "write" to 2,
             "some" to 2,
             "digits" to 2
-        ), top20Words("input/top20.txt").filter { it.value > 1 })
+        ), lesson4.task1.task1.top20Words("input/top20.txt").filter { it.value > 1 })
         assertEquals(
             mapOf(
                 "и" to 1106,
@@ -199,14 +205,14 @@ Basic, Ruby, Swift.
                 "мне" to 95,
                 "уж" to 95,
                 "ей" to 95
-            ), top20Words("input/onegin.txt")
+            ), lesson4.task1.task1.top20Words("input/onegin.txt")
         )
     }
 
     @Test
     @Tag("14")
     fun transliterate() {
-        transliterate(
+        lesson4.task1.task1.transliterate(
             "input/trans_in1.txt",
             mapOf('з' to "zz", 'р' to "r", 'д' to "d", 'й' to "y", 'М' to "m", 'и' to "yy", '!' to "!!!"),
             "temp.txt"
@@ -214,7 +220,7 @@ Basic, Ruby, Swift.
         assertFileContent("temp.txt", "Zzdrавствуy,\nmyyr!!!")
         File("temp.txt").delete()
 
-        transliterate(
+        lesson4.task1.task1.transliterate(
             "input/trans_in1.txt",
             mapOf('з' to "zZ", 'р' to "r", 'д' to "d", 'й' to "y", 'М' to "m", 'и' to "YY", '!' to "!!!"),
             "temp.txt"
@@ -226,7 +232,7 @@ Basic, Ruby, Swift.
     @Test
     @Tag("12")
     fun chooseLongestChaoticWord() {
-        chooseLongestChaoticWord("input/chaotic_in1.txt", "temp.txt")
+        lesson4.task1.task1.chooseLongestChaoticWord("input/chaotic_in1.txt", "temp.txt")
         assertFileContent("temp.txt", "Карминовый, Некрасивый")
         File("temp.txt").delete()
     }
@@ -256,7 +262,7 @@ Basic, Ruby, Swift.
     @Test
     @Tag("22")
     fun markdownToHtmlSimple() {
-        markdownToHtmlSimple("input/markdown_simple.md", "temp.html")
+        lesson4.task1.task1.markdownToHtmlSimple("input/markdown_simple.md", "temp.html")
         checkHtmlSimpleExample()
     }
 
@@ -311,17 +317,17 @@ Basic, Ruby, Swift.
     @Test
     @Tag("23")
     fun markdownToHtmlLists() {
-        markdownToHtmlLists("input/markdown_lists.md", "temp.html")
+        lesson4.task1.task1.markdownToHtmlLists("input/markdown_lists.md", "temp.html")
         checkHtmlListsExample()
     }
 
     @Test
     @Tag("30")
     fun markdownToHtml() {
-        markdownToHtml("input/markdown_simple.md", "temp.html")
+        lesson4.task1.task1.markdownToHtml("input/markdown_simple.md", "temp.html")
         checkHtmlSimpleExample()
 
-        markdownToHtml("input/markdown_lists.md", "temp.html")
+        lesson4.task1.task1.markdownToHtml("input/markdown_lists.md", "temp.html")
         checkHtmlListsExample()
     }
 
@@ -329,7 +335,7 @@ Basic, Ruby, Swift.
     @Tag("12")
     fun printMultiplicationProcess() {
         fun test(lhv: Int, rhv: Int, res: String) {
-            printMultiplicationProcess(lhv, rhv, "temp.txt")
+            lesson4.task1.task1.printMultiplicationProcess(lhv, rhv, "temp.txt")
             assertFileContent("temp.txt", res.trimIndent())
             File("temp.txt").delete()
         }
@@ -383,7 +389,7 @@ Basic, Ruby, Swift.
     fun printDivisionProcess() {
 
         fun test(lhv: Int, rhv: Int, res: String) {
-            printDivisionProcess(lhv, rhv, "temp.txt")
+            lesson4.task1.task1.printDivisionProcess(lhv, rhv, "temp.txt")
             assertFileContent("temp.txt", res.trimIndent())
             File("temp.txt").delete()
         }

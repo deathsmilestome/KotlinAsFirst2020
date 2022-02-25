@@ -4,6 +4,7 @@ package lesson2.task1
 
 import lesson1.task1.discriminant
 import lesson1.task1.loh
+import kotlin.math.abs
 import kotlin.math.max
 import kotlin.math.sqrt
 
@@ -13,8 +14,16 @@ import kotlin.math.sqrt
 // Вместе с предыдущими уроками = 9/12
 
 fun main() {
-
+    loh("first", 3, ::kto)
+    loh("second", 3, ::ya)
 }
+
+fun loh(x: String, n: Int, function: (n: Int) -> Int) {
+    println("$x, хуй ${function(n)}")
+}
+
+fun kto(n: Int): Int = n * 100 / 5
+fun ya(n: Int): Int = n * 4 / 2
 
 /**
  * Пример
@@ -124,7 +133,7 @@ fun whichRookThreatens(
         kingX == rookX2 || kingY == rookY2 -> 2
         else -> 0
     }
-    return when (dangerous){
+    return when (dangerous) {
         2 -> 2
         1 -> if ((kingX == rookX2 || kingY == rookY2) && (kingX == rookX1 || kingY == rookY1)) 3 else 1
         else -> 0
@@ -145,7 +154,16 @@ fun rookOrBishopThreatens(
     kingX: Int, kingY: Int,
     rookX: Int, rookY: Int,
     bishopX: Int, bishopY: Int
-): Int = TODO()
+): Int {
+    val bishopXDangerous = kingX - bishopX
+    val bishopYDangerous = kingY - bishopY
+    return when {
+        (kingX == rookX || kingY == rookY) && (kingX - bishopX == kingY - bishopY) -> 3
+        (kingX == rookX || kingY == rookY) && (kingX - bishopX != kingY - bishopY) -> 1
+        (abs(bishopXDangerous) == abs(bishopYDangerous)) && !(kingX == rookX || kingY == rookY) -> 2
+        else -> 0
+    }
+}
 
 /**
  * Простая (2 балла)
@@ -155,7 +173,33 @@ fun rookOrBishopThreatens(
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
+fun triangleKind(a: Double, b: Double, c: Double): Int {
+    return when {
+        a > b && a > c -> when {
+            a > b + c -> -1
+            a * a == b * b + c * c -> 1
+            a * a < b * b + c * c -> 0
+            a * a > b * b + c * c -> 2
+            else -> 123
+        }
+        c > b && c > a -> when {
+            c > b + a -> -1
+            c * c == b * b + a * a -> 1
+            c * c < b * b + a * a -> 0
+            c * c > b * b + a * a -> 2
+            else -> 123
+        }
+        b > c && b > a -> when {
+            b > c + a -> -1
+            b * b == c * c + a * a -> 1
+            b * b < c * c + a * a -> 0
+            b * b > c * c + a * a -> 2
+            else -> 123
+        }
+        else -> 0
+    }
+
+}
 
 /**
  * Средняя (3 балла)
@@ -165,4 +209,14 @@ fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
  * Найти длину пересечения отрезков AB и CD.
  * Если пересечения нет, вернуть -1.
  */
-fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = TODO()
+fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
+    return when {
+        (b < c) || (a > d) -> -1
+        (a >= c) && (b <= d) -> b - a
+        (a <= c) && (b >= d) -> d - c
+        (d >= b) && (b >= c) -> b - c
+        (d >= a) && (d <= b) -> d - a
+        else -> 123
+    }
+
+}
