@@ -270,27 +270,45 @@ fun isPalindrome(n: Int): Boolean {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun hasDifferentDigits(n: Int): Boolean {
-    var temp = n
-    while (temp / 10 != 0) {
-        if (temp % 10 - temp / 10 % 10 != 0) return true
-        temp /= 10
+
+fun main() {
+    val start = System.nanoTime()
+    hasDifferentDigitsV2(1999999999999999999)
+    hasDifferentDigitsV2(1999999999999999999)
+    hasDifferentDigitsV2(1999999999999999999)
+    hasDifferentDigitsV2(1999999999999999999)
+    hasDifferentDigitsV2(1999999999999999999)
+    hasDifferentDigitsV2(1999999999999999999)
+    hasDifferentDigitsV2(1999999999999999999)
+    hasDifferentDigitsV2(1999999999999999999)
+    hasDifferentDigitsV2(1999999999999999999)
+    println((System.nanoTime() - start) / 1000000.0)
+}
+
+fun hasDifferentDigits(n: Long): Boolean {
+    var temp = n / 10L
+    val rock = n % 10L
+    while (temp != 0L) {
+        if (temp % 10L - rock != 0L) return true
+        temp /= 10L
     }
     return false
 }
 
-//fun hasDifferentDigits(n: Int): Boolean {
-//    var temp = n
-//    var temp2 = n
-//    do {
-//        while (temp2 / 10 != 0) {
-//            temp2 /= 10
-//        }
-//        if (temp2 != temp % 10) return true
-//        temp /= 10
-//    } while (temp != 0)
-//    return false
-//}
+
+
+fun hasDifferentDigitsV2(n: Long): Boolean {
+    var temp = n
+    var temp2 = n
+    do {
+        while (temp2 / 10L != 0L) {
+            temp2 /= 10L
+        }
+        if (temp2 != temp % 10L) return true
+        temp /= 10L
+    } while (temp != 0L)
+    return false
+}
 
 /**
  * Средняя (4 балла)
