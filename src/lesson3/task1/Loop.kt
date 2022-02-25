@@ -281,7 +281,7 @@ fun hasDifferentDigits(n: Int): Boolean {
         temp /= 10
     } while (temp != 0)
     return false
-
+//
 }
 
 /**
