@@ -272,17 +272,25 @@ fun isPalindrome(n: Int): Boolean {
  */
 fun hasDifferentDigits(n: Int): Boolean {
     var temp = n
-    var temp2 = n
-    do {
-        while (temp2 / 10 != 0) {
-            temp2 /= 10
-        }
-        if (temp2 != temp % 10) return true
+    while (temp / 10 != 0) {
+        if (temp % 10 - temp / 10 % 10 != 0) return true
         temp /= 10
-    } while (temp != 0)
+    }
     return false
-//
 }
+
+//fun hasDifferentDigits(n: Int): Boolean {
+//    var temp = n
+//    var temp2 = n
+//    do {
+//        while (temp2 / 10 != 0) {
+//            temp2 /= 10
+//        }
+//        if (temp2 != temp % 10) return true
+//        temp /= 10
+//    } while (temp != 0)
+//    return false
+//}
 
 /**
  * Средняя (4 балла)
