@@ -55,8 +55,9 @@ fun quadraticRootProduct(a: Double, b: Double, c: Double): Double {
  */
 fun main() {
     loh(listOf(1, 2, 4, 5))
-
 }
+
+
 
 /**
  * Тривиальная (3 балла).

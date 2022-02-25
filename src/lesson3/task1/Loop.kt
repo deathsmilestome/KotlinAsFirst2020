@@ -2,6 +2,8 @@
 
 package lesson3.task1
 
+import lesson1.task1.numberRevert
+import lesson1.task1.sqr
 import kotlin.math.sqrt
 
 // Урок 3: циклы
@@ -212,7 +214,29 @@ fun squareBetweenExists(m: Int, n: Int): Boolean {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    var result = 0
+    var num = n
+    do {
+        result += num % 10
+        result *= 10
+        num /= 10
+    } while (num != 0)
+    return result / 10
+}
+
+
+//fun revert(n: Int): Int {
+//    var temp = n
+//    var result = 0
+//    while (temp > 0) {
+//        result += temp % 10
+//        result *= 10
+//        temp /= 10
+//    }
+//    return result / 10
+//}
+
 
 /**
  * Средняя (3 балла)
