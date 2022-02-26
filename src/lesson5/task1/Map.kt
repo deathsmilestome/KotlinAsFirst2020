@@ -97,7 +97,7 @@ fun buildWordSet(text: List<String>): MutableSet<String> {
  *     -> mapOf(5 to listOf("Семён", "Михаил"), 3 to listOf("Марат"))
  */
 
-fun addToList(name: String, grade: Int, result: MutableMap<Int, MutableList<String>>)
+fun addToListV3(name: String, grade: Int, result: MutableMap<Int, MutableList<String>>)
         : MutableMap<Int, MutableList<String>> {
     val list = result.getOrDefault(grade, mutableListOf())
     list.add(name)
@@ -109,16 +109,16 @@ fun buildGradesV3(grades: Map<String, Int>): Map<Int, List<String>> {
     var result = mutableMapOf<Int, MutableList<String>>()
     for ((name, grade) in grades) {
         result = when (grade) {
-            2 -> addToList(name, grade, result)
-            3 -> addToList(name, grade, result)
-            4 -> addToList(name, grade, result)
-            else -> addToList(name, grade, result)
+            2 -> addToListV3(name, grade, result)
+            3 -> addToListV3(name, grade, result)
+            4 -> addToListV3(name, grade, result)
+            else -> addToListV3(name, grade, result)
         }
     }
     return result
 }
 
-fun addToList (name: String, list: MutableList<String>, grade: Int, result: MutableMap<Int, List<String>>)
+fun addToListV2(name: String, list: MutableList<String>, grade: Int, result: MutableMap<Int, List<String>>)
         : MutableMap <Int, List<String>> {
     list.add(name)
     val x = grade
@@ -134,16 +134,16 @@ fun buildGradesV2(grades: Map<String, Int>): Map<Int, List<String>> {
     var five = mutableListOf<String>()
     for ((name, grade) in grades) {
         when (grade) {
-            2 -> result = addToList(name, two, grade, result)
-            3 -> result = addToList(name, three, grade, result)
-            4 -> result = addToList(name, four, grade, result)
-            else -> result = addToList(name, five, grade, result)
+            2 -> result = addToListV2(name, two, grade, result)
+            3 -> result = addToListV2(name, three, grade, result)
+            4 -> result = addToListV2(name, four, grade, result)
+            else -> result = addToListV2(name, five, grade, result)
         }
     }
     return result
 }
 
-fun buildGradesV1(grades: Map<String, Int>): Map<Int, List<String>> {
+fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
     var result = mutableMapOf<Int, List<String>>()
     var two = mutableListOf<String>()
     var three = mutableListOf<String>()
