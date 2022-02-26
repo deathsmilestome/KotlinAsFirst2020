@@ -96,7 +96,85 @@ fun buildWordSet(text: List<String>): MutableSet<String> {
  *   buildGrades(mapOf("Марат" to 3, "Семён" to 5, "Михаил" to 5))
  *     -> mapOf(5 to listOf("Семён", "Михаил"), 3 to listOf("Марат"))
  */
-fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> = TODO()
+
+fun addToList (name: String, list: MutableList<String>, grade: Int, result: MutableMap<Int, List<String>>)
+        : MutableMap <Int, List<String>> {
+    list.add(name)
+    val x = grade
+    result[grade] = list
+    return result
+}
+
+fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
+    var result = mutableMapOf<Int, List<String>>()
+    var two = mutableListOf<String>()
+    var three = mutableListOf<String>()
+    var four = mutableListOf<String>()
+    var five = mutableListOf<String>()
+    for ((name, grade) in grades) {
+        when (grade) {
+            2 -> result = addToList(name, two, grade, result)
+            3 -> result = addToList(name, three, grade, result)
+            4 -> result = addToList(name, four, grade, result)
+            else -> result = addToList(name, five, grade, result)
+        }
+    }
+    return result
+}
+
+//fun addToList (name: String, list: MutableList<String>, grade: Int, result: MutableMap<Int, List<String>>)
+//        : MutableMap <Int, List<String>> {
+//    list.add(name)
+//    val x = grade
+//    result[grade] = list
+//    return result
+//}
+//
+//fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
+//    var result = mutableMapOf<Int, List<String>>()
+//    var two = mutableListOf<String>()
+//    var three = mutableListOf<String>()
+//    var four = mutableListOf<String>()
+//    var five = mutableListOf<String>()
+//    for ((name, grade) in grades) {
+//        when (grade) {
+//            2 -> result = addToList(name, two, grade, result)
+//            3 -> result = addToList(name, three, grade, result)
+//            4 -> result = addToList(name, four, grade, result)
+//            else -> result = addToList(name, five, grade, result)
+//        }
+//    }
+//    return result
+//}
+
+//fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
+//    var result = mutableMapOf<Int, List<String>>()
+//    var two = mutableListOf<String>()
+//    var three = mutableListOf<String>()
+//    var four = mutableListOf<String>()
+//    var five = mutableListOf<String>()
+//    for ((name, grade) in grades) {
+//        when (grade) {
+//            2 -> {
+//                two.add(name)
+//                result[2] = two
+//            }
+//            3 -> {
+//                three.add(name)
+//                result[3] = three
+//            }
+//            4 -> {
+//                four.add(name)
+//                result[4] = four
+//            }
+//            else -> {
+//                five.add(name)
+//                result[5] = five
+//            }
+//        }
+//    }
+//    return result
+//}
 
 /**
  * Простая (2 балла)
