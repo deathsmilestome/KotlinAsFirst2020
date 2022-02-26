@@ -97,26 +97,21 @@ fun buildWordSet(text: List<String>): MutableSet<String> {
  *     -> mapOf(5 to listOf("Семён", "Михаил"), 3 to listOf("Марат"))
  */
 
-fun addToList (name: String, list: MutableList<String>, grade: Int, result: MutableMap<Int, List<String>>)
+fun addToList (name: String, grade: Int, result: MutableMap<Int, List<String>>)
         : MutableMap <Int, List<String>> {
-    list.add(name)
-    val x = grade
+    var list = result[grade]
     result[grade] = list
     return result
 }
 
 fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
     var result = mutableMapOf<Int, List<String>>()
-    var two = mutableListOf<String>()
-    var three = mutableListOf<String>()
-    var four = mutableListOf<String>()
-    var five = mutableListOf<String>()
     for ((name, grade) in grades) {
         when (grade) {
-            2 -> result = addToList(name, two, grade, result)
-            3 -> result = addToList(name, three, grade, result)
-            4 -> result = addToList(name, four, grade, result)
-            else -> result = addToList(name, five, grade, result)
+            2 -> result = addToList(name, grade, result)
+            3 -> result = addToList(name, grade, result)
+            4 -> result = addToList(name, grade, result)
+            else -> result = addToList(name, grade, result)
         }
     }
     return result
