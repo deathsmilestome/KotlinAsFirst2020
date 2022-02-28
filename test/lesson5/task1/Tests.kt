@@ -149,7 +149,7 @@ class Tests {
         )
         assertEquals(
             listOf("Marat"),
-            whoAreInBoth(listOf("Marat", "Mikhail"), listOf("Marat", "Kirill"))
+            whoAreInBoth(listOf("Marat", "Marat", "Mikhail"), listOf("Marat", "Marat", "Kirill"))
         )
         assertEquals(
             emptyList<String>(),

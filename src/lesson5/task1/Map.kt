@@ -119,7 +119,7 @@ fun buildGradesV3(grades: Map<String, Int>): Map<Int, List<String>> {
 }
 
 fun addToListV2(name: String, list: MutableList<String>, grade: Int, result: MutableMap<Int, List<String>>)
-        : MutableMap <Int, List<String>> {
+        : MutableMap<Int, List<String>> {
     list.add(name)
     val x = grade
     result[grade] = list
@@ -182,7 +182,12 @@ fun buildGrades(grades: Map<String, Int>): Map<Int, List<String>> {
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "z", "b" to "sweet")) -> true
  *   containsIn(mapOf("a" to "z"), mapOf("a" to "zee", "b" to "sweet")) -> false
  */
-fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = TODO()
+fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean {
+    for ((a1) in a) {
+        if (a[a1] != b[a1]) return false
+    }
+    return true
+}
 
 /**
  * Простая (2 балла)
@@ -198,8 +203,11 @@ fun containsIn(a: Map<String, String>, b: Map<String, String>): Boolean = TODO()
  *   subtractOf(a = mutableMapOf("a" to "z"), mapOf("a" to "z"))
  *     -> a changes to mutableMapOf() aka becomes empty
  */
-fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>) {
-    TODO()
+fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>): MutableMap<String, String> {
+    for ((key, value) in b) {
+        if (a[key] == value) a.remove(key)
+    }
+    return a
 }
 
 /**
@@ -209,7 +217,16 @@ fun subtractOf(a: MutableMap<String, String>, b: Map<String, String>) {
  * В выходном списке не должно быть повторяюихся элементов,
  * т. е. whoAreInBoth(listOf("Марат", "Семён, "Марат"), listOf("Марат", "Марат")) == listOf("Марат")
  */
-fun whoAreInBoth(a: List<String>, b: List<String>): List<String> = TODO()
+fun whoAreInBoth(a: List<String>, b: List<String>): List<String> {
+    var result = listOf<String>()
+    val temp = a + b
+    for (item in temp) {
+        if (temp.filter { it == item }.size > 1 && item !in result) result += item
+    }
+    return result
+
+}
+
 
 /**
  * Средняя (3 балла)
@@ -228,7 +245,16 @@ fun whoAreInBoth(a: List<String>, b: List<String>): List<String> = TODO()
  *     mapOf("Emergency" to "911", "Police" to "02")
  *   ) -> mapOf("Emergency" to "112, 911", "Police" to "02")
  */
-fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<String, String> = TODO()
+fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<String, String> {
+    val result = mutableMapOf<String, String>()
+    for ((key, value) in mapA) {
+        result += when {
+            mapB.containsKey(key) && (mapA[key] != mapB[key]) -> Pair(key, mapA[key] + ", " + mapB[key])
+            else -> Pair(key, value)
+        }
+    }
+    return mapB + result
+}
 
 /**
  * Средняя (4 балла)
@@ -240,7 +266,23 @@ fun mergePhoneBooks(mapA: Map<String, String>, mapB: Map<String, String>): Map<S
  *   averageStockPrice(listOf("MSFT" to 100.0, "MSFT" to 200.0, "NFLX" to 40.0))
  *     -> mapOf("MSFT" to 150.0, "NFLX" to 40.0)
  */
-fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> = TODO()
+
+
+fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Double> {
+    val result = mutableMapOf<String, Double>()
+    //if (stockPrices.isEmpty()) return result
+    for ((first, second) in stockPrices) {
+        if (!result.containsKey(first)) result += Pair(first, second)
+        else {
+            result[first] = (result[first]!! + second) / result.filterKeys { it == first }.size
+        }
+    }
+    for ((key, value) in result) {
+        result[key] = value / stockPrices.filter { it.first == key }.size
+    }
+    return result
+    //return result.mapValues { it.value / stockPrices.filter { it.first ==  } }
+}
 
 /**
  * Средняя (4 балла)
@@ -257,7 +299,11 @@ fun averageStockPrice(stockPrices: List<Pair<String, Double>>): Map<String, Doub
  *     "печенье"
  *   ) -> "Мария"
  */
-fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? = TODO()
+fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): String? {
+    val x = stuff.filter { it.value.first == kind }.toList().sortedBy { (_, value) -> value.second }
+    return if (x.isEmpty()) null
+    else x.first().first
+}
 
 /**
  * Средняя (3 балла)
