@@ -75,9 +75,8 @@ fun main() {
  * входными данными.
  */
 fun dateStrToDigit(str: String): String {
-    var result = String()
     val x = str.split(" ")
-    var months = mutableMapOf(
+    val months = mutableMapOf(
         1 to Pair("января", 31),
         2 to Pair("февраля", 28),
         3 to Pair("марта", 31),
@@ -91,23 +90,19 @@ fun dateStrToDigit(str: String): String {
         11 to Pair("ноября", 30),
         12 to Pair("декабря", 31),
     )
+//    var kto: String? = "f"
+//    requireNotNull(kto) { throw java.lang.IndexOutOfBoundsException("dolbaeb") }
+//    kto.length
     try {
-        val m = when {
-            months.filter { it.value.first == x[1] }
-                .isNotEmpty() -> months.filter { it.value.first == x[1] }.keys.first()
-            else -> return ""
-        }
-        val y = x.last().toInt() ?: 0
-        if ((y % 4 == 0) && (y % 400 != 0)) {
-            months.remove(2)
-            months + Pair(2, Pair("февраля", 29))
-        }
-        val d = x.first().toInt() ?: 0
+        val m = months.entries.find { it.value.first == x[1] }?.key ?: 0
+        val y = x.last().toInt()
+        if ((y % 4 == 0) && (y % 400 != 0)) months[2] = Pair("февраля", 29)
+        val d = x.first().toInt()
         if (m != 0 && y != 0 && d != 0 && d <= months[m]!!.second) return String.format("%02d.%02d.%d", d, m, y)
         return String()
 
     } catch (e: IndexOutOfBoundsException) {
-        return ""
+        return String()
     }
 }
 
