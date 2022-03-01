@@ -74,31 +74,42 @@ fun main() {
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30.02.2009) считается неверными
  * входными данными.
  */
+
+data class Month(val strMonth: String, val maxDay: Int) {
+    fun printlMonth() {
+        println("ok")
+    }
+}
+
 fun dateStrToDigit(str: String): String {
     val x = str.split(" ")
     val months = mutableMapOf(
-        1 to Pair("января", 31),
-        2 to Pair("февраля", 28),
-        3 to Pair("марта", 31),
-        4 to Pair("апреля", 30),
-        5 to Pair("мая", 31),
-        6 to Pair("июня", 30),
-        7 to Pair("июля", 31),
-        8 to Pair("августа", 31),
-        9 to Pair("сентября", 30),
-        10 to Pair("октября", 31),
-        11 to Pair("ноября", 30),
-        12 to Pair("декабря", 31),
+        1 to Month("января", 31),
+        2 to Month("февраля", 28),
+        3 to Month("марта", 31),
+        4 to Month("апреля", 30),
+        5 to Month("мая", 31),
+        6 to Month("июня", 30),
+        7 to Month("июля", 31),
+        8 to Month("августа", 31),
+        9 to Month("сентября", 30),
+        10 to Month("октября", 31),
+        11 to Month("ноября", 30),
+        12 to Month("декабря", 31)
     )
+
+
 //    var kto: String? = "f"
 //    requireNotNull(kto) { throw java.lang.IndexOutOfBoundsException("dolbaeb") }
 //    kto.length
     try {
-        val m = months.entries.find { it.value.first == x[1] }?.key ?: 0
+        val month = Month("asd", 1)
+        month.printlMonth()
+        val m = months.entries.find { it.value.strMonth == x[1] }?.key ?: 0
         val y = x.last().toInt()
-        if ((y % 4 == 0) && (y % 400 != 0)) months[2] = Pair("февраля", 29)
+        if ((y % 4 == 0) && (y % 400 != 0)) months[2] = Month("февраля", 29)
         val d = x.first().toInt()
-        if (m != 0 && y != 0 && d != 0 && d <= months[m]!!.second) return String.format("%02d.%02d.%d", d, m, y)
+        if (m != 0 && y != 0 && d != 0 && d <= months[m]!!.maxDay) return String.format("%02d.%02d.%d", d, m, y)
         return String()
 
     } catch (e: IndexOutOfBoundsException) {
