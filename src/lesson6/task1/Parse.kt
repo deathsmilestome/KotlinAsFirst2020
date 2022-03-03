@@ -144,7 +144,10 @@ fun dateDigitToStr(digital: String): String = TODO()
  *
  * PS: Дополнительные примеры работы функции можно посмотреть в соответствующих тестах.
  */
-fun flattenPhoneNumber(phone: String): String = TODO()
+fun flattenPhoneNumber(phone: String): String {
+    return if (!phone.matches(Regex("""(^\d{1,9}|\+)(\d{1,9}|-+|\s+|(\((\d{1,9}|-+|\s+)+\)))+"""))) ""
+    else phone.replace("""[)\-\s(\t]+""".toRegex(), "")
+}
 
 /**
  * Средняя (5 баллов)
@@ -156,7 +159,14 @@ fun flattenPhoneNumber(phone: String): String = TODO()
  * Прочитать строку и вернуть максимальное присутствующее в ней число (717 в примере).
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
-fun bestLongJump(jumps: String): Int = TODO()
+fun bestLongJump(jumps: String): Int {
+    return if (!jumps.replace("""\s+""".toRegex(), "").matches("""[\d\-%]+\d+[\d\-%]*""".toRegex())) -1
+    else jumps
+        .replace("""[%-]""".toRegex(), "")
+        .split("\\s+".toRegex())
+        .map { it.toInt() }
+        .maxOf { it }
+}
 
 /**
  * Сложная (6 баллов)
@@ -169,8 +179,13 @@ fun bestLongJump(jumps: String): Int = TODO()
  * При нарушении формата входной строки, а также в случае отсутствия удачных попыток,
  * вернуть -1.
  */
-fun bestHighJump(jumps: String): Int = TODO()
-
+fun bestHighJump(jumps: String): Int {
+    return if (!jumps.matches("""(\d+ [+%-]+ *)+""".toRegex())) -1
+    else """\d+""".toRegex().findAll(
+        jumps.replace("""\d+\s[-%]+|\s|%""".toRegex(), ""), 0
+    ).map { it.value.toInt() }.maxOf { it }
+}
+//\d{3}\+
 /**
  * Сложная (6 баллов)
  *
